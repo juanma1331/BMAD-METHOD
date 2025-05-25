@@ -1,0 +1,61 @@
+architect-checklist:
+  checklist_file: docs/checklists/architect-checklist.md
+  required_docs:
+    - architecture.md
+  default_locations:
+    - docs/architecture.md
+
+lista-arquitectura-frontend:
+  checklist_file: docs/checklists/lista-arquitectura-frontend.md
+  required_docs:
+    - frontend-architecture.md
+  default_locations:
+    - docs/frontend-architecture.md
+    - docs/fe-architecture.md
+
+lista-pm:
+  checklist_file: docs/checklists/lista-pm.md
+  required_docs:
+    - prd.md
+  default_locations:
+    - docs/prd.md
+
+po-master-checklist:
+  checklist_file: docs/checklists/po-master-checklist.md
+  required_docs:
+    - prd.md
+    - architecture.md
+  optional_docs:
+    - frontend-architecture.md
+  default_locations:
+    - docs/prd.md
+    - docs/frontend-architecture.md
+    - docs/architecture.md
+
+lista-borrador-historia:
+  checklist_file: docs/checklists/lista-borrador-historia.md
+  required_docs:
+    - story.md
+  default_locations:
+    - docs/stories/*.md
+
+lista-definicion-terminado:
+  checklist_file: docs/checklists/lista-definicion-terminado.md
+  required_docs:
+    - story.md
+  default_locations:
+    - docs/stories/*.md
+
+lista-cambios:
+  checklist_file: docs/checklists/lista-cambios.md
+  required_docs:
+    - prd.md
+    - architecture.md
+  optional_docs:
+    - frontend-architecture.md
+    - stories/*.md
+  default_locations:
+    - docs/prd.md
+    - docs/architecture.md
+    - docs/frontend-architecture.md
+    - docs/stories/*.md

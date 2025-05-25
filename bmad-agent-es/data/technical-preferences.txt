@@ -1,0 +1,242 @@
+# Preferencias Técnicas - Configuración por Defecto
+
+## Lenguajes de Programación Preferidos
+
+### Backend
+- Python (FastAPI, Django, Flask)
+- Node.js (Express, NestJS)
+- TypeScript (para proyectos Node.js)
+- Java (Spring Boot) - para proyectos empresariales
+- Go - para microservicios de alto rendimiento
+
+### Frontend
+- TypeScript/JavaScript
+- React (con Next.js para SSR/SSG)
+- Vue.js (con Nuxt.js)
+- Angular (para aplicaciones empresariales)
+
+### Mobile
+- React Native (desarrollo cross-platform)
+- Flutter (para aplicaciones nativas)
+- Progressive Web Apps (PWA)
+
+## Frameworks y Librerías Preferidos
+
+### Backend Frameworks
+- FastAPI (Python) - para APIs modernas y rápidas
+- Express.js (Node.js) - para APIs simples y flexibles
+- NestJS (Node.js) - para aplicaciones empresariales estructuradas
+- Django (Python) - para aplicaciones web completas
+- Spring Boot (Java) - para sistemas empresariales
+
+### Frontend Frameworks
+- Next.js (React) - para aplicaciones web modernas
+- Nuxt.js (Vue) - para aplicaciones Vue con SSR
+- Create React App - para SPAs simples
+- Vite - para desarrollo rápido
+
+### UI Component Libraries
+- Tailwind CSS + Headless UI
+- Material-UI (MUI)
+- Ant Design
+- Chakra UI
+- shadcn/ui
+
+## Bases de Datos
+
+### Relacionales (Preferidas)
+- PostgreSQL - para la mayoría de aplicaciones
+- MySQL - para aplicaciones web tradicionales
+- SQLite - para desarrollo y aplicaciones pequeñas
+
+### NoSQL
+- MongoDB - para datos no estructurados
+- Redis - para caché y sesiones
+- DynamoDB - para aplicaciones serverless en AWS
+
+### ORMs y Query Builders
+- Prisma (Node.js/TypeScript)
+- SQLAlchemy (Python)
+- TypeORM (Node.js/TypeScript)
+- Mongoose (MongoDB con Node.js)
+
+## Servicios en la Nube
+
+### Proveedores Preferidos
+1. AWS (Amazon Web Services)
+2. Vercel (para aplicaciones frontend)
+3. Google Cloud Platform
+4. Microsoft Azure
+
+### Servicios Específicos
+- **Hosting:** Vercel, Netlify, AWS EC2/ECS
+- **Bases de Datos:** AWS RDS, MongoDB Atlas, PlanetScale
+- **Storage:** AWS S3, Cloudinary
+- **CDN:** CloudFront, Cloudflare
+- **Authentication:** Auth0, AWS Cognito, Firebase Auth
+
+## Herramientas de Desarrollo
+
+### Control de Versiones
+- Git con GitHub (preferido)
+- GitLab (alternativa)
+- Conventional Commits para mensajes
+
+### CI/CD
+- GitHub Actions (preferido)
+- GitLab CI
+- Vercel (para frontend)
+- AWS CodePipeline
+
+### Testing
+- Jest (JavaScript/TypeScript)
+- pytest (Python)
+- Cypress (E2E testing)
+- Playwright (E2E testing moderno)
+- React Testing Library
+
+### Code Quality
+- ESLint + Prettier (JavaScript/TypeScript)
+- Black + isort (Python)
+- Husky (Git hooks)
+- SonarQube (análisis de código)
+
+## Arquitectura Preferida
+
+### Patrones Arquitectónicos
+- Microservicios para aplicaciones grandes
+- Monolito modular para aplicaciones medianas
+- Serverless para funciones específicas
+- JAMstack para sitios web estáticos
+
+### Estructura de Proyecto
+- Monorepo para proyectos relacionados
+- Polyrepo para servicios independientes
+- Separación clara frontend/backend
+
+### APIs
+- REST APIs (preferido para simplicidad)
+- GraphQL (para consultas complejas)
+- tRPC (para aplicaciones TypeScript full-stack)
+
+## Containerización y Orquestación
+
+### Containerización
+- Docker (preferido)
+- Docker Compose para desarrollo local
+
+### Orquestación
+- Kubernetes (para producción a gran escala)
+- AWS ECS (para aplicaciones en AWS)
+- Docker Swarm (para setups simples)
+
+## Monitoreo y Observabilidad
+
+### Logging
+- Winston (Node.js)
+- Python logging (Python)
+- Structured logging con JSON
+
+### Monitoring
+- Prometheus + Grafana
+- AWS CloudWatch
+- Datadog
+- New Relic
+
+### Error Tracking
+- Sentry (preferido)
+- Rollbar
+- Bugsnag
+
+## Seguridad
+
+### Authentication
+- JWT tokens
+- OAuth 2.0 / OpenID Connect
+- Auth0 o AWS Cognito
+
+### Encryption
+- HTTPS/TLS para todas las comunicaciones
+- bcrypt para hashing de passwords
+- AWS KMS para gestión de claves
+
+### Security Headers
+- Helmet.js (Node.js)
+- CORS configurado apropiadamente
+- Rate limiting
+
+## Performance
+
+### Caching
+- Redis para caché de aplicación
+- CDN para assets estáticos
+- Browser caching headers
+
+### Optimization
+- Code splitting en frontend
+- Lazy loading de componentes
+- Database indexing
+- Image optimization
+
+## Desarrollo Local
+
+### Environment Management
+- Docker Compose para servicios locales
+- .env files para configuración
+- nvm/pyenv para gestión de versiones
+
+### Development Tools
+- VS Code (editor preferido)
+- Postman/Insomnia para testing de APIs
+- pgAdmin/MongoDB Compass para bases de datos
+
+## Deployment
+
+### Estrategias Preferidas
+- Blue-green deployment
+- Rolling updates
+- Feature flags para releases graduales
+
+### Environments
+- Development (local)
+- Staging (pre-producción)
+- Production (producción)
+
+## Documentation
+
+### Code Documentation
+- JSDoc (JavaScript/TypeScript)
+- Docstrings (Python)
+- README.md comprensivos
+
+### API Documentation
+- OpenAPI/Swagger
+- Postman collections
+- GraphQL introspection
+
+## Package Management
+
+### JavaScript/Node.js
+- npm (por defecto)
+- yarn (alternativa)
+- pnpm (para monorepos)
+
+### Python
+- pip + requirements.txt
+- Poetry (preferido para proyectos nuevos)
+- pipenv (alternativa)
+
+## Notas Adicionales
+
+### Principios Generales
+- Preferir soluciones maduras y bien soportadas
+- Priorizar developer experience
+- Mantener dependencies actualizadas
+- Seguir principios SOLID
+- Implementar testing desde el inicio
+
+### Consideraciones de Equipo
+- Elegir tecnologías basadas en experiencia del equipo
+- Considerar curva de aprendizaje
+- Evaluar soporte de la comunidad
+- Planificar para mantenimiento a largo plazo
