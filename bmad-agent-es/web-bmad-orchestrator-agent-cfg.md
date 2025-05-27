@@ -35,9 +35,12 @@
 - templates:
   - [Plantilla PRD](templates#prd-tmpl)
 - tasks:
-  - [Crear PRD](tasks#crear-prd)
-  - [Corregir Rumbo](tasks#corregir-rumbo)
-  - [Crear Prompt Investigación Profunda](tasks#crear-prompt-investigacion-profunda)
+  - "[Crear PRD](tasks#crear-prd)"
+  - "[Corregir Rumbo](tasks#corregir-rumbo)"
+  - "[Crear Prompt Investigación Profunda](tasks#crear-prompt-investigacion-profunda)"
+  - "[Definir Plan de Investigación Estratégica](tasks#definir-plan-investigacion-estrategica)"
+  - "[Generar Plan de Implementación Detallado de Solución (con Investigación Opcional)](tasks#generar-plan-implementacion-con-investigacion)"
+  - "[Generar Plan de Implementación Directa de Solución](tasks#generar-plan-implementacion-directa)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
@@ -53,8 +56,9 @@
 - templates:
   - [Plantilla Arquitectura](templates#architecture-tmpl)
 - tasks:
-  - [Crear Arquitectura](tasks#crear-arquitectura)
-  - [Crear Prompt Investigación Profunda](tasks#crear-prompt-investigacion-profunda)
+  - "[Crear Arquitectura](tasks#crear-arquitectura)"
+  - "[Crear Prompt Investigación Profunda](tasks#crear-prompt-investigacion-profunda)"
+  - "[Definir Plan de Investigación Estratégica](tasks#definir-plan-investigacion-estrategica)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
@@ -71,9 +75,9 @@
   - [Plantilla Arquitectura Frontend](templates#plantilla-arquitectura-frontend)
   - [Plantilla Especificación Frontend](templates#plantilla-especificacion-frontend)
 - tasks:
-  - [Crear Arquitectura Frontend](tasks#crear-arquitectura-frontend)
-  - [Crear Prompt Frontend IA](tasks#crear-prompt-frontend-ia)
-  - [Crear Especificación UX/UI](tasks#crear-especificacion-uxui)
+  - "[Crear Arquitectura Frontend](tasks#crear-arquitectura-frontend)"
+  - "[Crear Prompt Frontend IA](tasks#crear-prompt-frontend-ia)"
+  - "[Crear Especificación UX/UI](tasks#crear-especificacion-uxui)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
@@ -91,10 +95,13 @@
 - templates:
   - [Plantilla Historia](templates#story-tmpl)
 - tasks:
-  - [Ejecutar Lista Verificación](tasks#ejecutar-lista-verificacion)
-  - [Borrador historia para agente dev](tasks#story-draft-task)
-  - [Extraer Épicas y fragmentar Arquitectura](tasks#tarea-fragmentacion-documentos)
-  - [Corregir Rumbo](tasks#corregir-rumbo)
+  - "[Ejecutar Lista Verificación](tasks#ejecutar-lista-verificacion)"
+  - "[Borrador historia para agente dev](tasks#story-draft-task)"
+  - "[Extraer Épicas y fragmentar Arquitectura](tasks#tarea-fragmentacion-documentos)"
+  - "[Corregir Rumbo](tasks#corregir-rumbo)"
+  - "[Definir Plan de Investigación Estratégica](tasks#definir-plan-investigacion-estrategica)"
+  - "[Generar Plan de Implementación Detallado de Solución (con Investigación Opcional)](tasks#generar-plan-implementacion-con-investigacion)"
+  - "[Generar Plan de Implementación Directa de Solución](tasks#generar-plan-implementacion-directa)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
@@ -110,13 +117,11 @@
   - [Lista Definición Terminado](checklists#lista-definicion-terminado)
   - [Lista Borrador Historia](checklists#lista-borrador-historia)
 - tasks:
-  - [Ejecutar Lista Verificación](tasks#ejecutar-lista-verificacion)
-  - [Corregir Rumbo](tasks#corregir-rumbo)
-  - [Borrador historia para agente dev](tasks#story-draft-task)
+  - "[Ejecutar Lista Verificación](tasks#ejecutar-lista-verificacion)"
+  - "[Corregir Rumbo](tasks#corregir-rumbo)"
+  - "[Borrador historia para agente dev](tasks#story-draft-task)"
 - templates:
   - [Plantilla Historia](templates#story-tmpl)
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
-
-
