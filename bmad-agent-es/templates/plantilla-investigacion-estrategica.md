@@ -47,13 +47,12 @@
 
 ## SECCIÓN 4: ARTEFACTOS DE SALIDA DE LA INVESTIGACIÓN
 
-### 4.0. Ubicación Base de Entrega de Artefactos
-- **Ruta Absoluta Base para los Entregables de esta Investigación:** `{RUTA_ABSOLUTA_BASE_ENTREGABLES}`
-  *(Ejemplo: `C:\Users\jmdel\juanma\personal\tests\bmad-additions\investigacion_nombre_del_caso\`)
-  *(Nota: Los nombres de archivo y directorios sugeridos en los siguientes puntos serán relativos a esta ruta base, a menos que se especifique lo contrario).*
+### 4.0. Ubicación de Entrega de Artefactos
+- **Ruta Base Absoluta para los Entregables de esta Investigación (a ser proporcionada por el usuario durante la planificación):** `{RUTA_ABSOLUTA_BASE_ENTREGABLES_PROPORCIONADA}`
+  *(Nota: El agente IDE externo utilizará esta ruta como la base exacta para crear los directorios y archivos de artefactos. Los nombres de archivo y directorios sugeridos en los siguientes puntos serán relativos a esta ruta base).*
 
 ### 4.1. Informe Final de Investigación (Obligatorio)
-- **Nombre del Archivo (relativo a la ruta base):** `informe-final-investigacion-{TEMA_INVESTIGACION_SNAKE_CASE}.md`
+- **Nombre del Archivo (relativo a la `{RUTA_ABSOLUTA_BASE_ENTREGABLES_PROPORCIONADA}`):** `informe-final-investigacion-{TEMA_INVESTIGACION_SNAKE_CASE}.md`
 - **Estructura Sugerida del Informe:**
     1.  **Resumen Ejecutivo:** (Principales hallazgos, conclusiones y recomendaciones clave en 1-2 párrafos).
     2.  **Introducción:** (Reiterar problema, objetivos y alcance de la investigación).
@@ -66,12 +65,12 @@
     9.  **Apéndices (si es necesario):** (Glosario, datos adicionales, etc.).
 
 ### 4.2. Referencias y Datos de Soporte (Obligatorio si se recopilan)
-- **Directorio (relativo a la ruta base):** `referencias-y-datos-investigacion-{TEMA_INVESTIGACION_SNAKE_CASE}/`
+- **Subdirectorio (relativo a la `{RUTA_ABSOLUTA_BASE_ENTREGABLES_PROPORCIONADA}`):** `datos_soporte/`
 - **Contenido:** (Ej: Archivos CSV/JSON con datos recopilados, transcripciones anonimizadas de entrevistas, enlaces a documentación relevante, scripts de PoC, análisis competitivos tabulados).
   `{DESCRIPCION_DATOS_SOPORTE}`
 
 ### 4.3. Otros Artefactos (Opcional, según necesidad)
-- **Ubicación/Nombre (relativo a la ruta base o especificar ruta completa si es diferente):** `{UBICACION_NOMBRE_OTROS_ARTEFACTOS}`
+- **Ubicación/Nombre (relativo a la `{RUTA_ABSOLUTA_BASE_ENTREGABLES_PROPORCIONADA}` o en un subdirectorio específico dentro de ella):** `{UBICACION_NOMBRE_OTROS_ARTEFACTOS}`
 - **Descripción:** `{DESCRIPCION_OTROS_ARTEFACTOS_OPCIONALES}`
 
 ## SECCIÓN 5: CRITERIOS DE ÉXITO Y VALIDACIÓN DE LA INVESTIGACIÓN
