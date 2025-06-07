@@ -184,3 +184,28 @@ El Método BMad (Breakthrough Method of Agile AI-driven Development) es un enfoq
 - **Validation Checks:** Verificaciones de validación regulares
 - **Backup Strategies:** Estrategias de respaldo y recuperación
 - **Escalation Procedures:** Procedimientos de escalación claros
+
+## Flujo de Trabajo de Enriquecimiento: Del Requisito al Código
+
+El método BMAD utiliza una cadena de enriquecimiento para asegurar la máxima calidad en los planes de implementación. El flujo es: **Arquitecto -> PO/PM -> Agente IDE**.
+
+1.  El **Arquitecto** recibe un requisito (PRD, bug) y produce las **Especificaciones Técnicas** explícitas.
+2.  El **PO/PM** recibe el requisito y las especificaciones técnicas, y los integra en un **Plan de Implementación** detallado.
+3.  El **Agente IDE** recibe el plan y lo **ejecuta** sin ambigüedades.
+
+```mermaid
+graph TD
+    subgraph "Fase de Planificación y Enriquecimiento"
+        A(Input del Vibe-CEO: PRD, Bug, Idea...) --> B(Arquitecto / PO / PM);
+        B -- Analiza Código y Crea --> C{Plan de Implementación v3.0};
+        C -- (Extremadamente Detallado y Explícito) --> D(Agente IDE);
+    end
+
+    subgraph "Fase de Ejecución"
+        D -- Ejecuta Órdenes Directamente --> E(Código Implementado);
+        E -- Valida con Pruebas de Calidad --> F(Entrega Final);
+    end
+
+    style B fill:#f9f,stroke:#333,stroke-width:2px
+    style D fill:#9cf,stroke:#333,stroke-width:2px
+```

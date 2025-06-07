@@ -39,8 +39,7 @@
   - "[Corregir Rumbo](tasks#corregir-rumbo)"
   - "[Crear Prompt Investigación Profunda](tasks#crear-prompt-investigacion-profunda)"
   - "[Definir Plan de Investigación Estratégica](tasks#definir-plan-investigacion-estrategica)"
-  - "[Generar Plan de Implementación Detallado de Solución (con Investigación Opcional)](tasks#generar-plan-implementacion-con-investigacion)"
-  - "[Generar Plan de Implementación Directa de Solución](tasks#generar-plan-implementacion-directa)"
+  - "[Crear Plan de Implementación](tasks#crear-plan-de-implementacion)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
@@ -100,8 +99,7 @@
   - "[Extraer Épicas y fragmentar Arquitectura](tasks#tarea-fragmentacion-documentos)"
   - "[Corregir Rumbo](tasks#corregir-rumbo)"
   - "[Definir Plan de Investigación Estratégica](tasks#definir-plan-investigacion-estrategica)"
-  - "[Generar Plan de Implementación Detallado de Solución (con Investigación Opcional)](tasks#generar-plan-implementacion-con-investigacion)"
-  - "[Generar Plan de Implementación Directa de Solución](tasks#generar-plan-implementacion-directa)"
+  - "[Crear Plan de Implementación](tasks#crear-plan-de-implementacion)"
 - Interaction Modes:
   - "Interactive"
   - "YOLO"
