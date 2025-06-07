@@ -2,8 +2,10 @@
 const fs = require("fs");
 const path = require("path");
 
-// --- Configuration ---
-const configFilePath = "./build-agent-cfg-es.js"; // Path relative to this script (__dirname)
+// Check if the --bundle flag is present in the arguments.
+const createBundle = process.argv.includes('--bundle');
+
+const configFilePath = "./build-agent-cfg-es.js";
 let config;
 try {
   config = require(configFilePath);
@@ -22,7 +24,6 @@ try {
   process.exit(1);
 }
 
-// --- Helper Functions ---
 function getBaseFilename(filePath) {
   const filenameWithExt = path.basename(filePath);
   const lastExt = path.extname(filenameWithExt);
@@ -38,13 +39,10 @@ function ensureDirectoryExists(dirPath) {
   }
 }
 
-// --- Main Script Logic ---
 async function main() {
-  // 1. Load Configuration - ALREADY DONE ABOVE
   console.log(
     `Loading configuration from: ${path.resolve(__dirname, configFilePath)}`
   );
-  // No need to check fs.existsSync(CONFIG_FILE_PATH) or read/parse, require() handles it.
 
   if (
     !config ||
@@ -59,201 +57,63 @@ async function main() {
     process.exit(1);
   }
 
-  // 2. Determine and validate asset folder root and build directory
-  const workspaceRoot = path.resolve(__dirname, ".");
-
-  const assetFolderRootInput = config.asset_root;
-  let assetFolderRoot;
-  try {
-    assetFolderRoot = path.resolve(__dirname, assetFolderRootInput);
-    if (
-      !fs.existsSync(assetFolderRoot) ||
-      !fs.statSync(assetFolderRoot).isDirectory()
-    ) {
-      console.error(
-        `Error: Asset folder root '${assetFolderRootInput}' (resolved to '${assetFolderRoot}') not found or not a directory.`
-      );
-      process.exit(1);
-    }
-  } catch (error) {
-    console.error(
-      `Error: Could not resolve asset folder root '${assetFolderRootInput}'. ${error.message}`
-    );
+  const assetFolderRoot = path.resolve(__dirname, config.asset_root);
+  if (!fs.existsSync(assetFolderRoot) || !fs.statSync(assetFolderRoot).isDirectory()) {
+    console.error(`Error: Asset folder root '${assetFolderRoot}' not found or not a directory.`);
     process.exit(1);
   }
   console.log(`Using resolved asset folder root: ${assetFolderRoot}`);
 
-  const buildDirInput = config.build_dir;
-  let buildDir;
-  try {
-    buildDir = path.resolve(__dirname, buildDirInput);
-  } catch (error) {
-    console.error(
-      `Error: Could not resolve build directory '${buildDirInput}'. ${error.message}`
-    );
-    process.exit(1);
-  }
+  const buildDir = path.resolve(__dirname, config.build_dir);
   ensureDirectoryExists(buildDir);
   console.log(`Build directory is: ${buildDir}`);
 
+  if (createBundle) {
+    console.log("-> --bundle flag detected. A single prompt bundle file will be generated at the end.");
+  }
+
   const buildDirNameOnly = path.basename(buildDir);
 
-  // 3. Generate agent-prompt.txt
-  const orchestratorPromptPathInput = config.orchestrator_agent_prompt;
-  let orchestratorPromptPath;
-  try {
-    orchestratorPromptPath = path.resolve(
-      __dirname,
-      orchestratorPromptPathInput
-    );
-    if (
-      !fs.existsSync(orchestratorPromptPath) ||
-      !fs.statSync(orchestratorPromptPath).isFile()
-    ) {
-      console.error(
-        `Error: Orchestrator agent prompt file '${orchestratorPromptPathInput}' (resolved to '${orchestratorPromptPath}') not found or not a file.`
-      );
-      process.exit(1);
-    }
-  } catch (error) {
-    console.error(
-      `Error: Could not resolve orchestrator agent prompt file '${orchestratorPromptPathInput}'. ${error.message}`
-    );
+  const orchestratorPromptPath = path.resolve(__dirname, config.orchestrator_agent_prompt);
+  if (!fs.existsSync(orchestratorPromptPath) || !fs.statSync(orchestratorPromptPath).isFile()) {
+    console.error(`Error: Orchestrator agent prompt file '${orchestratorPromptPath}' not found or not a file.`);
     process.exit(1);
   }
 
   const agentPromptOutputPath = path.join(buildDir, "agent-prompt.txt");
-  try {
-    const promptContent = fs.readFileSync(orchestratorPromptPath, "utf8");
-    fs.writeFileSync(agentPromptOutputPath, promptContent);
-    console.log(`
-Successfully generated '${agentPromptOutputPath}'`);
-  } catch (error) {
-    console.error(
-      `Error generating '${agentPromptOutputPath}': ${error.message}`
-    );
-    process.exit(1);
-  }
+  const promptContent = fs.readFileSync(orchestratorPromptPath, "utf8");
+  fs.writeFileSync(agentPromptOutputPath, promptContent);
+  console.log(`\nSuccessfully generated '${agentPromptOutputPath}'`);
 
-  // 4. Discover subdirectories to process from asset_root
-  console.log(`
-Discovering source directories in '${assetFolderRoot}' (excluding '${buildDirNameOnly}')...`);
-  let sourceSubdirNames;
-  try {
-    sourceSubdirNames = fs
-      .readdirSync(assetFolderRoot, { withFileTypes: true })
-      .filter(
-        (dirent) => dirent.isDirectory() && dirent.name !== buildDirNameOnly
-      )
-      .map((dirent) => dirent.name);
-  } catch (error) {
-    console.error(
-      `Error reading asset folder root '${assetFolderRoot}': ${error.message}`
-    );
-    process.exit(1);
-  }
+  console.log(`\nDiscovering source directories in '${assetFolderRoot}' (excluding '${buildDirNameOnly}')...`);
+  const sourceSubdirNames = fs
+    .readdirSync(assetFolderRoot, { withFileTypes: true })
+    .filter((dirent) => dirent.isDirectory() && dirent.name !== buildDirNameOnly)
+    .map((dirent) => dirent.name);
 
   if (sourceSubdirNames.length === 0) {
-    console.warn(
-      `Warning: No source subdirectories found in '${assetFolderRoot}' (excluding '${buildDirNameOnly}'). No asset bundles will be created.`
-    );
+    console.warn(`Warning: No source subdirectories found in '${assetFolderRoot}'. No asset bundles will be created.`);
   } else {
-    console.log(
-      `Found source directories to process: ${sourceSubdirNames.join(", ")}`
-    );
+    console.log(`Found source directories to process: ${sourceSubdirNames.join(", ")}`);
   }
 
-  // 5. Perform pre-check for duplicate base filenames in each discovered subdirectory
-  console.log("Performing pre-check for duplicate base filenames...");
-  for (const subdirName of sourceSubdirNames) {
-    const sourceSubdirPath = path.join(assetFolderRoot, subdirName);
-
-    try {
-      const files = fs.readdirSync(sourceSubdirPath);
-      if (files.length === 0) {
-        console.log(
-          `  Directory '${sourceSubdirPath}' is empty. No duplicates possible.`
-        );
-        continue;
-      }
-
-      console.log(`  Checking for duplicates in '${sourceSubdirPath}'...`);
-      const baseFilenamesSeen = {};
-
-      for (const filenameWithExt of files) {
-        const filePath = path.join(sourceSubdirPath, filenameWithExt);
-        if (fs.statSync(filePath).isFile()) {
-          const baseName = getBaseFilename(filenameWithExt);
-
-          if (baseFilenamesSeen[baseName]) {
-            console.error(
-              `Error: Duplicate base name '${baseName}' found in directory '${sourceSubdirPath}'.`
-            );
-            console.error(
-              `       Conflicting files: '${baseFilenamesSeen[baseName]}' and '${filenameWithExt}'.`
-            );
-            console.error(
-              `       Please ensure all files in a subdirectory have unique names after removing their last extensions.`
-            );
-            process.exit(1);
-          } else {
-            baseFilenamesSeen[baseName] = filenameWithExt;
-          }
-        }
-      }
-      console.log(`    No duplicates found in '${sourceSubdirPath}'.`);
-    } catch (error) {
-      console.warn(
-        `Warning: Could not read directory '${sourceSubdirPath}' during pre-check. ${error.message}`
-      );
-    }
-  }
-  console.log(
-    "Pre-check completed. No critical duplicate base filenames found (or directories were empty/unreadable)."
-  );
-
-  // NEW STEP: Copy agent_cfg to build_dir as agent-config.txt
-  const agentConfigPathInput = config.agent_cfg;
-  let agentConfigPath;
-  try {
-    agentConfigPath = path.resolve(__dirname, agentConfigPathInput);
-    if (
-      !fs.existsSync(agentConfigPath) ||
-      !fs.statSync(agentConfigPath).isFile()
-    ) {
-      console.error(
-        `Error: Agent config file '${agentConfigPathInput}' (resolved to '${agentConfigPath}') not found or not a file.`
-      );
-      process.exit(1);
-    }
-  } catch (error) {
-    console.error(
-      `Error: Could not resolve agent config file '${agentConfigPathInput}'. ${error.message}`
-    );
+  const agentConfigPath = path.resolve(__dirname, config.agent_cfg);
+  if (!fs.existsSync(agentConfigPath) || !fs.statSync(agentConfigPath).isFile()) {
+    console.error(`Error: Agent config file '${agentConfigPath}' not found or not a file.`);
     process.exit(1);
   }
 
   const agentConfigOutputPath = path.join(buildDir, "agent-config.txt");
-  try {
-    const configContent = fs.readFileSync(agentConfigPath, "utf8");
-    fs.writeFileSync(agentConfigOutputPath, configContent);
-    console.log(`
-Successfully copied agent configuration to '${agentConfigOutputPath}'`);
-  } catch (error) {
-    console.error(
-      `Error copying agent configuration to '${agentConfigOutputPath}': ${error.message}`
-    );
-    process.exit(1);
-  }
+  const configContent = fs.readFileSync(agentConfigPath, "utf8");
+  fs.writeFileSync(agentConfigOutputPath, configContent);
+  console.log(`\nSuccessfully copied agent configuration to '${agentConfigOutputPath}'`);
 
-  // 6. Main processing loop for discovered subdirectories
   for (const subdirName of sourceSubdirNames) {
     const sourceSubdirPath = path.join(assetFolderRoot, subdirName);
     const outputFilename = `${subdirName}.txt`;
     const targetFile = path.join(buildDir, outputFilename);
 
-    console.log(`
-Processing '${subdirName}' directory into '${targetFile}'`);
+    console.log(`\nProcessing '${subdirName}' directory into '${targetFile}'`);
 
     if (fs.existsSync(targetFile)) {
       fs.unlinkSync(targetFile);
@@ -262,9 +122,7 @@ Processing '${subdirName}' directory into '${targetFile}'`);
 
     const files = fs.readdirSync(sourceSubdirPath);
     if (files.length === 0) {
-      console.warn(
-        `Warning: Source directory '${sourceSubdirPath}' is empty. '${targetFile}' will remain empty.`
-      );
+      console.warn(`Warning: Source directory '${sourceSubdirPath}' is empty. '${targetFile}' will remain empty.`);
       continue;
     }
 
@@ -273,27 +131,16 @@ Processing '${subdirName}' directory into '${targetFile}'`);
       if (fs.statSync(filePath).isFile()) {
         const baseName = getBaseFilename(filenameWithExt);
 
-        // Skip files like 'filename.ide.ext'
         if (baseName.endsWith(".ide")) {
-          console.log(
-            `  Skipping IDE-specific file: '${filenameWithExt}' in '${subdirName}'`
-          );
-          continue; // Skip to the next file
+          console.log(`  Skipping IDE-specific file: '${filenameWithExt}' in '${subdirName}'`);
+          continue;
         }
 
-        console.log(
-          `  Appending content from '${filenameWithExt}' (as '${baseName}') to '${targetFile}'`
-        );
+        console.log(`  Appending content from '${filenameWithExt}' (as '${baseName}') to '${targetFile}'`);
 
         const fileContent = fs.readFileSync(filePath, "utf8");
-
-        const startMarker = `==================== START: ${baseName} ====================
-`;
-        const endMarker = `
-==================== END: ${baseName} ====================
-
-
-`;
+        const startMarker = `==================== START: ${baseName} ====================\n`;
+        const endMarker = `\n==================== END: ${baseName} ====================\n\n\n`;
 
         fs.appendFileSync(targetFile, startMarker);
         fs.appendFileSync(targetFile, fileContent);
@@ -306,14 +153,32 @@ Processing '${subdirName}' directory into '${targetFile}'`);
     console.log(`Finished processing '${subdirName}'.`);
   }
 
-  console.log(`
-Script finished. Output files are in ${buildDir}`);
-  console.log(
-    `To run this script: node ${path.relative(
-      path.resolve(__dirname, "."),
-      __filename
-    )}`
-  );
+  if (createBundle) {
+    console.log("\nCreating single-file bundle...");
+    const bundleOutputPath = path.join(buildDir, "bmad-prompt-bundle-es.md");
+    
+    let bundleContent = [];
+
+    bundleContent.push(`# PROMPT\n\`\`\`txt\n${promptContent}\n\`\`\`\n`);
+    bundleContent.push(`## Assets\n`);
+    bundleContent.push(`### Config\n\`\`\`txt\n${configContent}\n\`\`\`\n`);
+
+    for (const subdirName of sourceSubdirNames) {
+      const assetFilePath = path.join(buildDir, `${subdirName}.txt`);
+      if (fs.existsSync(assetFilePath)) {
+        const assetContent = fs.readFileSync(assetFilePath, "utf8");
+        if (assetContent.trim()) {
+          const sectionTitle = subdirName.charAt(0).toUpperCase() + subdirName.slice(1);
+          bundleContent.push(`### ${sectionTitle}\n\`\`\`txt\n${assetContent}\n\`\`\`\n`);
+        }
+      }
+    }
+    
+    fs.writeFileSync(bundleOutputPath, bundleContent.join("\n"));
+    console.log(`-> Successfully generated single-file bundle: '${bundleOutputPath}'`);
+  }
+
+  console.log(`\nScript finished. Output files are in ${buildDir}`);
 }
 
 main().catch((error) => {
